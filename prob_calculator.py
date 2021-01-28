@@ -6,6 +6,7 @@ class Hat:
     def __init__(self, **kwargs):
         # init the hat, and create a list for the hat w/ a variable # of kwargs
         self.contents = []
+        self.not_in_hat = []
         for key, value in kwargs.items():
             for i in range(0, value):
                 self.contents.append(key)
@@ -17,11 +18,16 @@ class Hat:
         # going to change to a while loop so I can keep a sim. logic here
         i = 0
         while i < num_balls:
-            rand_num = random.randint(0, (len(self.contents) - 1)) # not sure about this, randint may be including the second #
+            if len(self.contents) == 0: # when the self.contents list is empty, copy the not_in_hat list to it, then empty the not_in_hat list
+                self.contents = self.not_in_hat.copy()
+                self.not_in_hat= [] 
+            rand_num = random.randint(0, len(self.contents)) 
             if rand_num in nums_used:
                 continue
             nums_used.append(rand_num)
             rand_balls.append(self.contents[rand_num])
+            self.not_in_hat.append(self.contents[rand_num])
+            del self.contents[rand_num]
             i += 1
         return rand_balls
             # this may need some addtl work, I'm not sure if the balls in the hat should reset each time the func is called, or if they are out of the hat until the hat is empty

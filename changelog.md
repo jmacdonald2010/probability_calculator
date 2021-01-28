@@ -1,3 +1,6 @@
+01/28/2021 09:45
+Running into list index out of range errors in my draw function, and when i don't have those, i get stuck in a loop. Need to solve this issue. Pushing to remote before getting ready for work.
+
 01/28/2021 09:25
 Finished writing the code, needs some fixing. In the test, the program seems to get stuck, and I'm not entirely sure why. I also need to make it so that the draw method reduces the contents in the contents list. Pushing prior to working on those things in case of error.
 
