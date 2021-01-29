@@ -1,3 +1,6 @@
+01/28/2021 22:46
+Updated the readme.
+
 01/28/2021 22:39
 It worked! Final push to in-progress branch before merging w/ main.
 
