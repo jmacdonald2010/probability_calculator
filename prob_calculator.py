@@ -12,27 +12,23 @@ class Hat:
                 self.contents.append(key)
 
     def draw(self, num_balls): 
-        # loop thru random selector given # of times, but don't allow for duplicates, returns list of strings
+        # select random balls from the hat contents, not allowing for duplicates. If the # of balls being drawn is larger than the contents of the hat, returns the entire self.contents as a list.
         rand_balls = []
-        random.seed(95) # not entirely sure how this works but this is what i will try
-        # going to change to a while loop so I can keep a sim. logic here
+        random.seed(95)
         i = 0
-        while i < num_balls:
-            if len(self.contents) == 0: # when the self.contents list is empty, copy the not_in_hat list to it, then empty the not_in_hat list
-                self.contents = self.not_in_hat.copy()
-                self.not_in_hat= [] 
-            rand_num = random.randrange(0, len(self.contents))
-            # then scale the random.seed value
-            rand_balls.append(self.contents[(rand_num - 1)])
-            self.not_in_hat.append(self.contents[(rand_num - 1)])
-            del self.contents[(rand_num - 1)]
-            i += 1
-        # then return all balls to hat # trying to not do that for now
-        '''for ball in self.not_in_hat:
-            self.contents.append(ball)
-        self.not_in_hat = []'''
+        if num_balls >= (len(self.contents) + len(self.not_in_hat)): 
+            rand_balls = self.contents
+        else:
+            while i < num_balls:
+                if len(self.contents) == 0: # when the self.contents list is empty, copy the not_in_hat list to it, then empty the not_in_hat list
+                    self.contents = self.not_in_hat.copy()
+                    self.not_in_hat= [] 
+                rand_num = random.randrange(0, len(self.contents))
+                rand_balls.append(self.contents[(rand_num - 1)])
+                self.not_in_hat.append(self.contents[(rand_num - 1)])
+                del self.contents[(rand_num - 1)]
+                i += 1
         return rand_balls
-            # this may need some addtl work, I'm not sure if the balls in the hat should reset each time the func is called, or if they are out of the hat until the hat is empty
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     m = 0 # is # of successful experiments we run
@@ -57,34 +53,9 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
                 else:
                     experiment_success = False 
                     break
-            except KeyError:
+            except KeyError: # if none of our expected balls where in the results, this is used to avoid an error
                 experiment_success = False
                 break 
         if experiment_success == True:
             m += 1
     return m/num_experiments
-        
-
-
-
-
-
-# ex for testing
-hat = Hat(black=6, red=4, green=3)
-print(hat.draw(5))
-probability = experiment(hat=hat, 
-                  expected_balls={"red":2,"green":1},
-                  num_balls_drawn=5,
-                  num_experiments=2000)
-print(probability)
-
-# from the actual test itself, b/c for some reason it keeps failing
-hat = Hat(red=5,blue=2)
-actual = hat.draw(2)
-expected = ['blue', 'red']
-print("Actual: ", actual, ", Expected: ", expected)
-
-# test from test_module
-hat = Hat(blue=3,red=2,green=6)
-probability = experiment(hat=hat, expected_balls={"blue":2,"green":1}, num_balls_drawn=4, num_experiments=1000)
-print(probability)
