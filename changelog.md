@@ -1,3 +1,6 @@
+01/28/2021 21:17
+Going to try using random.seed(95) instead of randint. According to some forum posts regarding this project, random.seed(95) is needed for the code to pass the tests.
+
 01/28/2021 20:30
 Code still does not pass test. Unsure of errors. Going to keep trying things, not entirely sure what. This commit is really just a backup save in case I really mess things up.
 

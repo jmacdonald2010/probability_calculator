@@ -13,7 +13,6 @@ class Hat:
 
     def draw(self, num_balls): 
         # loop thru random selector given # of times, but don't allow for duplicates, returns list of strings
-        # nums_used = []
         rand_balls = []
         # going to change to a while loop so I can keep a sim. logic here
         i = 0
@@ -22,13 +21,14 @@ class Hat:
                 self.contents = self.not_in_hat.copy()
                 self.not_in_hat= [] 
             rand_num = random.randint(0, len(self.contents)) 
-            # if rand_num in nums_used: # this has been commented out b/c if i'm not placing balls back into the hat until the hat is empty, the nums_used list serves no purpose
-            #   continue
-            # nums_used.append((rand_num - 1))
             rand_balls.append(self.contents[(rand_num - 1)])
             self.not_in_hat.append(self.contents[(rand_num - 1)])
             del self.contents[(rand_num - 1)]
             i += 1
+        # then return all balls to hat
+        for ball in self.not_in_hat:
+            self.contents.append(ball)
+        self.not_in_hat = []
         return rand_balls
             # this may need some addtl work, I'm not sure if the balls in the hat should reset each time the func is called, or if they are out of the hat until the hat is empty
 
@@ -74,4 +74,15 @@ probability = experiment(hat=hat,
                   expected_balls={"red":2,"green":1},
                   num_balls_drawn=5,
                   num_experiments=2000)
+print(probability)
+
+# from the actual test itself, b/c for some reason it keeps failing
+hat = Hat(red=5,blue=2)
+actual = hat.draw(2)
+expected = ['blue', 'red']
+print("Actual: ", actual, ", Expected: ", expected)
+
+# test from test_module
+hat = Hat(blue=3,red=2,green=6)
+probability = experiment(hat=hat, expected_balls={"blue":2,"green":1}, num_balls_drawn=4, num_experiments=1000)
 print(probability)
