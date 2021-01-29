@@ -11,9 +11,9 @@ class Hat:
             for i in range(0, value):
                 self.contents.append(key)
 
-    def draw(self, num_balls): # need to update something here; needs to reduce contents in contents
+    def draw(self, num_balls): 
         # loop thru random selector given # of times, but don't allow for duplicates, returns list of strings
-        nums_used = []
+        # nums_used = []
         rand_balls = []
         # going to change to a while loop so I can keep a sim. logic here
         i = 0
@@ -22,12 +22,12 @@ class Hat:
                 self.contents = self.not_in_hat.copy()
                 self.not_in_hat= [] 
             rand_num = random.randint(0, len(self.contents)) 
-            if rand_num in nums_used:
-                continue
-            nums_used.append(rand_num)
-            rand_balls.append(self.contents[rand_num])
-            self.not_in_hat.append(self.contents[rand_num])
-            del self.contents[rand_num]
+            # if rand_num in nums_used: # this has been commented out b/c if i'm not placing balls back into the hat until the hat is empty, the nums_used list serves no purpose
+            #   continue
+            # nums_used.append((rand_num - 1))
+            rand_balls.append(self.contents[(rand_num - 1)])
+            self.not_in_hat.append(self.contents[(rand_num - 1)])
+            del self.contents[(rand_num - 1)]
             i += 1
         return rand_balls
             # this may need some addtl work, I'm not sure if the balls in the hat should reset each time the func is called, or if they are out of the hat until the hat is empty

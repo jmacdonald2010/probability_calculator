@@ -1,3 +1,6 @@
+01/28/2021 20:30
+Code still does not pass test. Unsure of errors. Going to keep trying things, not entirely sure what. This commit is really just a backup save in case I really mess things up.
+
 01/28/2021 09:45
 Running into list index out of range errors in my draw function, and when i don't have those, i get stuck in a loop. Need to solve this issue. Pushing to remote before getting ready for work.
 
