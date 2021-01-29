@@ -14,21 +14,23 @@ class Hat:
     def draw(self, num_balls): 
         # loop thru random selector given # of times, but don't allow for duplicates, returns list of strings
         rand_balls = []
+        random.seed(95) # not entirely sure how this works but this is what i will try
         # going to change to a while loop so I can keep a sim. logic here
         i = 0
         while i < num_balls:
             if len(self.contents) == 0: # when the self.contents list is empty, copy the not_in_hat list to it, then empty the not_in_hat list
                 self.contents = self.not_in_hat.copy()
                 self.not_in_hat= [] 
-            rand_num = random.randint(0, len(self.contents)) 
+            rand_num = random.randrange(0, len(self.contents))
+            # then scale the random.seed value
             rand_balls.append(self.contents[(rand_num - 1)])
             self.not_in_hat.append(self.contents[(rand_num - 1)])
             del self.contents[(rand_num - 1)]
             i += 1
-        # then return all balls to hat
-        for ball in self.not_in_hat:
+        # then return all balls to hat # trying to not do that for now
+        '''for ball in self.not_in_hat:
             self.contents.append(ball)
-        self.not_in_hat = []
+        self.not_in_hat = []'''
         return rand_balls
             # this may need some addtl work, I'm not sure if the balls in the hat should reset each time the func is called, or if they are out of the hat until the hat is empty
 

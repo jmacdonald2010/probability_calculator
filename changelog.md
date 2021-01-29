@@ -1,3 +1,6 @@
+01/28/2021 21:55
+Fails only one test now. Attempting to fix so it does not fail the last test.
+
 01/28/2021 21:17
 Going to try using random.seed(95) instead of randint. According to some forum posts regarding this project, random.seed(95) is needed for the code to pass the tests.
 
